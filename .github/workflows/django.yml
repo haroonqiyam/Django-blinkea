@@ -96,10 +96,14 @@ jobs:
           --port=8080
           --allow-unauthenticated
           --add-cloudsql-instances=${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
+          --set-cloudsql-instances=${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
+          --min-instances=1
         env_vars: |
           DATABASE_URL=postgres://blinkea_user:blinkea-user-2025@localhost/blinkea_django?host=/cloudsql/${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
           DJANGO_SETTINGS_MODULE=blinkea.settings
           PORT=8080
+          GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
+          REGION=${{ env.REGION }}
         secrets: |
           DJANGO_SECRET_KEY=django-secret-key:latest
 
