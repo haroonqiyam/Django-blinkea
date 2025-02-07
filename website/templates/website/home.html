@@ -1,0 +1,64 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+    <div class="container mx-auto px-6 py-20">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-5xl font-bold leading-tight mb-6">Transform Your Business with Blinkea</h1>
+                <p class="text-xl mb-8">Innovative technology solutions that drive growth and efficiency for your enterprise</p>
+                <div class="space-x-4">
+                    <a href="{% url 'website:solutions' %}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">Explore Solutions</a>
+                    <a href="#contact" class="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">Contact Us</a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="{% static 'img/hero-illustration.svg' %}" alt="Hero Illustration" class="w-full">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-16">Why Choose Blinkea</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {% for feature in features %}
+            <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-{{ feature.icon }} text-2xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">{{ feature.title }}</h3>
+                <p class="text-gray-600">{{ feature.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-20 bg-blue-600 text-white">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            {% for stat in stats %}
+            <div>
+                <div class="text-5xl font-bold mb-2">{{ stat.number }}</div>
+                <div class="text-xl">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-8">Ready to Get Started?</h2>
+        <p class="text-xl text-gray-600 mb-10">Transform your business with our innovative solutions</p>
+        <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Schedule a Consultation</a>
+    </div>
+</section>
+{% endblock %}

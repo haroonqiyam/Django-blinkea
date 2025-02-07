@@ -1,14 +1,7 @@
+{% extends "website/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blinkea Solutions</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50">
+
+{% block content %}
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
         <div class="container mx-auto px-4">
@@ -75,5 +68,4 @@
             <a href="#contact" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300">Contact Us</a>
         </div>
     </section>
-</body>
-</html>
+{% endblock %}
