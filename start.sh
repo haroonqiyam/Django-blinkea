@@ -9,6 +9,10 @@ mkdir -p static
 echo "Applying database migrations..."
 python manage.py migrate
 
+# Create superuser
+echo "Creating superuser if not exists..."
+python manage.py shell < create_superuser.py
+
 # Load initial data if database is empty
 echo "Checking and loading initial data if needed..."
 python manage.py loaddata data.json
