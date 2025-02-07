@@ -22,8 +22,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . .
 
+# Make start script executable
+RUN chmod +x start.sh
+
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Run gunicorn
-CMD gunicorn --bind :$PORT blinkea.wsgi:application
+# Run start script which handles migrations and starts gunicorn
+CMD ["./start.sh"]
