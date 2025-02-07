@@ -32,6 +32,18 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
+# CSRF Settings
+CSRF_TRUSTED_ORIGINS = [
+    'https://blinkea-web-293882995795.us-central1.run.app',
+    'http://blinkea-web-293882995795.us-central1.run.app',
+]
+
+# Session and CSRF Cookie Settings
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+
 # Error handlers
 handler503 = 'website.views.error_503'
 
