@@ -1,0 +1,104 @@
+{% load static %}
+
+<!-- Clients Section -->
+
+{% load static %}
+
+<section 
+    style="
+        background-color: #FFFFFF; 
+        padding-top: {{ client_settings.container_spacing_top }}px; 
+        padding-bottom: {{ client_settings.container_spacing_bottom }}px; 
+        padding-left: {{ client_settings.container_spacing_left }}px; 
+        padding-right: {{ client_settings.container_spacing_right }}px;
+    " 
+    data-aos="fade-up"
+>
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <!-- Section Title -->
+        <h2 
+            style="
+                font-size: 2rem; 
+                font-weight: 800; 
+                color: #1F2937; 
+                margin-bottom: 2rem;
+            "
+        >
+            Clients & Partners
+        </h2>
+
+        <!-- Logos Grid -->
+        <div 
+            style="
+                display: grid; 
+                grid-template-columns: repeat({{ client_settings.columns }}, 1fr); 
+                gap: 2rem; 
+                align-items: center; 
+                justify-items: center;  /* Ensures items are centered */
+            "
+        >
+            {% for client in clients %}
+            <div 
+                style="
+                    display: flex; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    justify-content: center;
+                " 
+                data-aos="fade-in" 
+                data-aos-delay="{{ forloop.counter0|add:100 }}"
+            >
+                <!-- Client Name -->
+                <p 
+                    style="
+                        font-size: 1rem; 
+                        font-weight: bold; 
+                        color: #1F2937; 
+                        margin-bottom: 0.5rem;
+                    "
+                >
+                    {{ client.name }}
+                </p>
+                <!-- Client Logo -->
+                {% if client.logo %}
+                <img 
+                    src="{{ client.logo.url }}" 
+                    alt="{{ client.name }}" 
+                    style="
+                        display: block; 
+                        max-width: 100%; 
+                        height: auto; 
+                        filter: grayscale(1); 
+                        transition: filter 0.3s ease-in-out; 
+                        border-radius: 0.25rem;
+                        margin: 0 auto;  /* Centers logo horizontally */
+                    " 
+                    onmouseover="this.style.filter='grayscale(0)'" 
+                    onmouseout="this.style.filter='grayscale(1)'"
+                >
+                {% else %}
+                <p 
+                    style="
+                        font-size: 0.875rem; 
+                        color: #9CA3AF; 
+                        margin-top: 0.5rem;
+                    "
+                >
+                    No Logo Available
+                </p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section> 
+
+<!-- Include AOS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+</script>

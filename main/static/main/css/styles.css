@@ -1,0 +1,75 @@
+/* Scroll Portfolio Styles */
+.scroll-section {
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.scroll-wrapper {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+    position: relative;
+    width: max-content;
+}
+
+.scroll-wrapper.logos {
+    animation: scrollLogos 20s linear infinite;
+}
+
+.scroll-wrapper.thumbnails {
+    animation: scrollThumbnails 30s linear infinite;
+}
+
+.scroll-wrapper img {
+    margin: 0 2rem;
+    flex-shrink: 0;
+}
+
+.scroll-wrapper.logos img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(1);
+    transition: filter 0.3s ease;
+}
+
+.scroll-wrapper.logos img:hover {
+    filter: grayscale(0);
+}
+
+.scroll-wrapper.thumbnails img {
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-wrapper.thumbnails a:hover img {
+    opacity: 0.75;
+}
+
+@keyframes scrollLogos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollThumbnails {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .scroll-wrapper.logos img {
+        height: 40px;
+        margin: 0 1rem;
+    }
+
+    .scroll-wrapper.thumbnails img {
+        height: 150px;
+        margin: 0 1rem;
+    }
+}

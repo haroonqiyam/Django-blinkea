@@ -1,0 +1,54 @@
+{% load static %}
+
+<header style="background-color: {{ header_settings.background_color|default:'#ffffff' }};
+              height: {{ header_settings.header_height|default:'80' }}px;
+              padding-top: {{ header_settings.container_top_padding|default:'10' }}px;
+              padding-bottom: {{ header_settings.container_bottom_padding|default:'10' }}px;
+              padding-left: {{ header_settings.container_left_padding|default:'20' }}px;
+              padding-right: {{ header_settings.container_right_padding|default:'20' }}px;">
+    
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between flex-wrap"
+         style="height: {{ header_settings.header_height|default:'80' }}px;">
+        
+        <!-- Logo Section -->
+        <div class="logo flex-shrink-0"
+             style="padding-top: {{ header_settings.logo_top_padding|default:'10' }}px;
+                    padding-bottom: {{ header_settings.logo_bottom_padding|default:'10' }}px;
+                    padding-left: {{ header_settings.logo_left_padding|default:'20' }}px;
+                    padding-right: {{ header_settings.logo_right_padding|default:'20' }}px;">
+            
+            {% if header_settings.logo %}
+            <a href="/">
+                <img src="{{ header_settings.logo.url }}" alt="Logo"
+                     class="h-auto w-[{{ header_settings.logo_height|default:'50' }}px]">
+            </a>
+        {% else %}
+            <a href="/">Blinkea</a> <!-- Fallback if no logo is uploaded -->
+        {% endif %}
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex flex-wrap space-x-8 mt-4 md:mt-0">
+            {% for link in nav_links %}
+                <a href="{{ link.url }}"
+                   style="color: {{ header_settings.menu_item_text_color|default:'#333' }};
+                          font-size: {{ header_settings.menu_font_size|default:'16' }}px;" 
+                   class="font-bold transition duration-300">
+                    {{ link.title }}
+                </a>
+            {% endfor %}
+        </nav>
+
+        <!-- Account Button -->
+        <div class="mt-4 md:mt-0">
+            <a href="{{ header_settings.button_link|default:'/signup' }}"
+               class="font-bold py-2 px-6 rounded-lg transition duration-300 h-[42px] flex items-center justify-center"
+               style="color: {{ header_settings.button_text_color|default:'#ffffff' }};
+                      background-color: {{ header_settings.button_background_color|default:'#007bff' }};
+                      hover:background-color: {{ header_settings.button_hover_background_color|default:'#0056b3' }};
+                      hover:color: {{ header_settings.button_hover_text_color|default:'#ffffff' }};">
+                {{ header_settings.button_text|default:'Sign Up' }}
+            </a>
+        </div>
+    </div>
+</header>

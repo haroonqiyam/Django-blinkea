@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions - Blinkea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<header class="bg-black py-4">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6">
+        
+        <!-- ✅ Logo Section -->
+        <div class="flex-shrink-0">
+            {% if header_settings.logo %}
+                <a href="/">
+                    <img src="{{ header_settings.logo.url }}" alt="Blinkea Logo" class="h-16">
+                </a>
+            {% else %}
+                <a href="http://127.0.0.1:8000"><img src="http://127.0.0.1:8000/media/logos/logo_v55JOk8.png" width="120"></a>
+            {% endif %}
+        </div>
+
+        <!-- ✅ Navigation Links -->
+        <nav class="hidden md:flex space-x-8">
+            {% for link in nav_links %}
+                <a href="{{ link.url }}" 
+                   style="color: {{ header_settings.menu_item_text_color|default:'#fff' }};
+                          font-size: {{ header_settings.menu_font_size|default:'18' }}px;" 
+                   class="font-bold hover:text-red-500 transition duration-300">
+                    {{ link.title }}
+                </a>
+            {% endfor %}
+        </nav>
+
+        <!-- ✅ Account Button -->
+        <div>
+            <a href="http://127.0.0.1:8000/auth/my-account/" 
+               class="bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-700 transition">
+                {{ header_settings.button_text|default:'My Account' }}
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<body class="bg-gray-100 text-gray-900">
+
+
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-16 text-center" style="background-color: #dd1a22;">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl font-bold">AI-Powered Branding & Design Solutions</h1>
+            <p class="mt-4 text-lg">From brochures to websites, Blinkea helps businesses achieve stunning branding with AI-driven efficiency.</p>
+            <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-6 inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200">Start your project now!</a>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="max-w-6xl mx-auto py-16 px-6">
+        <h2 class="text-3xl font-bold text-center"> Our AI-Powered Design Solutions</h2>
+
+        <!-- Grid Layout -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+
+            <!-- Brochure Design -->
+            <div class="bg-white shadow-md p-6 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">📖 Brochure Design</h3>
+                <p class="mt-2 text-gray-600">Make a lasting impression with a custom-designed, print-ready brochure.</p>
+                <ul class="mt-4 text-sm text-gray-700">
+                    <li>AI-Optimized Layouts</li>
+                    <li>High-Resolution Print & Digital Formats</li>
+                    <li>Fully Customizable Designs</li>
+                </ul>
+                <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Get Started</a>
+            </div>
+
+            <!-- Company Profile Design -->
+            <div class="bg-white shadow-md p-6 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">🏢 Company Profile Design</h3>
+                <p class="mt-2 text-gray-600">Tell your brand’s story professionally with a modern, polished company profile.</p>
+                <ul class="mt-4 text-sm text-gray-700">
+                    <li>Business-Oriented Design</li>
+                    <li>Engaging Visuals & Content Structuring</li>
+                    <li>Multi-Page Profile in Digital & Print Formats</li>
+                </ul>
+                <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Create Your Profile</a>
+            </div>
+
+            <!-- Copywriting Services -->
+            <div class="bg-white shadow-md p-6 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">✍️ AI Copywriting Services</h3>
+                <p class="mt-2 text-gray-600">Let our AI craft persuasive and engaging content tailored to your business.</p>
+                <ul class="mt-4 text-sm text-gray-700">
+                    <li>Professional Business Writing</li>
+                    <li>SEO-Optimized & Clear Messaging</li>
+                    <li>Quick Delivery & Revisions Available</li>
+                </ul>
+                <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Get AI-Powered Copy</a>
+            </div>
+
+            <!-- Print & Digital Marketing Materials -->
+            <div class="bg-white shadow-md p-6 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">🖨️ Print & Digital Materials</h3>
+                <p class="mt-2 text-gray-600">Enhance your brand with high-quality flyers, banners, and digital ads.</p>
+                <ul class="mt-4 text-sm text-gray-700">
+                    <li>Custom-Designed Flyers & Ads</li>
+                    <li>Optimized for Both Print & Digital Use</li>
+                    <li>Instant Preview & Quick Turnaround</li>
+                </ul>
+                <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Start Designing</a>
+            </div>
+
+            <!-- Website Design -->
+            <div class="bg-white shadow-md p-6 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">🌐 Website Design</h3>
+                <p class="mt-2 text-gray-600">Get a modern, responsive, and AI-enhanced website for your business.</p>
+                <ul class="mt-4 text-sm text-gray-700">
+                    
+                    <li>Custom Website Design & Development</li>
+                    <li>Optimized for SEO & Speed</li>
+                    <li>Mobile-Friendly & Responsive</li>
+                </ul>
+                <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Build Your Website</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="bg-gray-200 py-16">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl font-bold">⚡ How It Works</h2>
+            <p class="mt-4 text-lg">Using Blinkea is fast, simple, and efficient. Get started today!</p>
+
+            <div class="grid md:grid-cols-4 gap-6 mt-10 text-lg">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl font-bold text-blue-600">1️⃣</span>
+                    <p class="mt-2">Choose a Service</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl font-bold text-blue-600">2️⃣</span>
+                    <p class="mt-2">Fill Out a Simple Form</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl font-bold text-blue-600">3️⃣</span>
+                    <p class="mt-2">Get AI-Generated Drafts</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl font-bold text-blue-600">4️⃣</span>
+                    <p class="mt-2">Review, Approve & Download</p>
+                </div>
+            </div>
+
+            <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-8 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700">Sign Up & Get Started</a>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="text-center py-16">
+        <h2 class="text-3xl font-bold">🚀 Start Your AI-Powered Branding Journey Today!</h2>
+        <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700">Get Started Now</a>
+    </section>
+
+
+        <!-- Footer Section -->
+        {% include 'main/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scrolling on the body */
+}
+
+.container-fluid {
+    padding: 0px 0;
+    overflow: hidden; /* Ensure content does not overflow */
+}
+
+.logo-panel, .thumbnail-panel {
+    margin: 20px 0;
+    overflow: hidden; /* Prevent overflow outside panels */
+}
+
+.scroll-wrapper {
+    display: flex;
+    gap: 20px; /* Match the gap in JavaScript */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.scroll-wrapper img {
+    flex-shrink: 0; /* Prevent images from shrinking */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+    border-radius: 10px; /* Smooth edges */
+}
+
+.scroll-wrapper img:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.scroll-wrapper::after {
+    content: ""; /* Add a spacer dynamically */
+    flex-shrink: 0;
+    width: 20px; /* Default gap size, overridden dynamically */
+}
+
+.scroll-wrapper[data-speed] {
+    animation: scroll var(--scroll-speed, 4s) linear infinite; /* Use custom speed */
+}
+
+/* Specific animation speeds for panels if needed */
+.scroll-wrapper.logos {
+    --scroll-speed: 10s;
+}
+
+.scroll-wrapper.thumbnails {
+    --scroll-speed: 15s;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Scroll halfway for seamless looping */
+    }
+}

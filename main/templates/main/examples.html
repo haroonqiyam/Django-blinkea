@@ -1,0 +1,703 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Examples - Blinkea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #dd1a22;
+            --secondary-color: #333;
+            --transition-speed: 0.3s;
+        }
+
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-speed);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform var(--transition-speed);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform var(--transition-speed);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .portfolio-description {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .view-more {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .view-more:hover {
+            background-color: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(221, 26, 34, 0.3);
+        }
+
+
+        .modal-dialog {
+            max-width: 1000px;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            border-bottom: none;
+            padding: 20px 30px;
+        }
+
+        .modal-body {
+            padding: 0;
+        }
+
+        .modal-project-container {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .modal-image-container {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .modal-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details-container {
+            flex: 1;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .modal-project-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .project-meta-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .project-meta-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-meta-label {
+            font-weight: 600;
+            width: 100px;
+            color: var(--secondary-color);
+        }
+
+        .project-meta-value {
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .portfolio-overlay {
+                transform: translateY(0);
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            }
+
+            .modal-project-container {
+                flex-direction: column;
+            }
+
+            .modal-image-container {
+                max-width: 100%;
+            }
+
+            .modal-details-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-black py-4">
+        <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6">
+            <!-- Logo Section -->
+            <div class="flex-shrink-0">
+                {% if header_settings.logo %}
+                    <a href="/"><img src="{{ header_settings.logo.url }}" alt="Blinkea Logo" class="h-16"></a>
+                {% else %}
+                    <a href="http://127.0.0.1:8000"><img src="http://127.0.0.1:8000/media/logos/logo_v55JOk8.png" width="120"></a>
+                {% endif %}
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8">
+                {% for link in nav_links %}
+                    <a href="{{ link.url }}" 
+                       style="color: {{ header_settings.menu_item_text_color|default:'#fff' }};
+                              font-size: {{ header_settings.menu_font_size|default:'18' }}px;" 
+                       class="font-bold hover:text-red-500 transition duration-300">
+                        {{ link.title }}
+                    </a>
+                {% endfor %}
+            </nav>
+
+            <!-- Account Button -->
+            <div>
+                <a href="http://127.0.0.1:8000/auth/my-account/" 
+                   class="bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-700 transition">
+                    {{ header_settings.button_text|default:'My Account' }}
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+
+    <main class="portfolio-section">
+        <h1 class="text-center mb-5">Our Portfolio</h1>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="brochure">Brochures</button>
+            <button class="filter-btn" data-filter="profile">Company Profiles</button>
+            <button class="filter-btn" data-filter="flyer">Flyers</button>
+            <button class="filter-btn" data-filter="catalog">Catalogs</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item" data-category="brochure">
+                <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/building_Dubai.jpg" alt="Dubai Real Estate Profile">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">Dubai Real Estate Profile</div>
+                    <div class="portfolio-category">Brochure Design</div>
+                    <div class="portfolio-description">
+                        A modern brochure design showcasing luxury real estate properties in Dubai.
+                    </div>
+                    <a href="#" class="view-more" data-bs-toggle="modal" data-bs-target="#portfolioModal1">View Details</a>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 2 -->
+            <div class="portfolio-item" data-category="profile">
+                <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/generalTrading_1.png" alt="Corporate Profile">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">Jebel Ali Trading</div>
+                    <div class="portfolio-category">Company Profile</div>
+                    <div class="portfolio-description">
+                        Modern company profile for a leading trade and shipping firm showcasing their innovations.
+                    </div>
+                    <a href="#" class="view-more" data-bs-toggle="modal" data-bs-target="#portfolioModal2">View Details</a>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 3 -->
+            <div class="portfolio-item" data-category="catalog">
+                <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/parkTowers.jpg" alt="Fashion Catalog">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">Park Towers Company Profile</div>
+                    <div class="portfolio-category">Profile Design</div>
+                    <div class="portfolio-description">
+                        Elegant Profile design for a Parking Management service agency.
+                    </div>
+                    <a href="#" class="view-more" data-bs-toggle="modal" data-bs-target="#portfolioModal3">View Details</a>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 4 -->
+            <div class="portfolio-item" data-category="brochure">
+                <img src="http://127.0.0.1:8000/media/portfolio/hover/alwashia.jpg" alt="Hotel Brochure">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">Luxury Fashion Company Profile</div>
+                    <div class="portfolio-category">Profile Design</div>
+                    <div class="portfolio-description">
+                        Company profile and product showcase for Dubai store leasing.
+                    </div>
+                    <a href="#" class="view-more" data-bs-toggle="modal" data-bs-target="#portfolioModal4">View Details</a>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 5 -->
+            <div class="portfolio-item" data-category="flyer">
+                <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/cleaning_services.png" alt="Event Flyer">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">Lux Cleaning Services</div>
+                    <div class="portfolio-category">Profile Design</div>
+                    <div class="portfolio-description">
+                        Lux Cleaning Services provide premium service to luxury hotels and resorts.
+                    </div>
+                    <a href="#" class="view-more" data-bs-toggle="modal" data-bs-target="#portfolioModal5">View Details</a>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 6 -->
+            <div class="portfolio-item" data-category="profile">
+                <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/emirates_travel.png" alt="Restaurant Profile">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">Fly High Fly to UAE</div>
+                    <div class="portfolio-category">Company Profile</div>
+                    <div class="portfolio-description">
+                        Appetizing brand profile for a high-end travel experiences.
+                    </div>
+                    <a href="#" class="view-more" data-bs-toggle="modal" data-bs-target="#portfolioModal6">View Details</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Portfolio Modal 1 -->
+    <div class="modal fade" id="portfolioModal1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-container">
+                        <div class="modal-image-container">
+                            <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/building_Dubai.jpg" alt="Dubai Real Estate Profile">
+                        </div>
+                        <div class="modal-details-container">
+                            <h2 class="modal-project-title">Dubai Real Estate Profile</h2>
+                            <p class="modal-project-description">A sophisticated brochure design for a luxury real estate development in Dubai. The design emphasizes the premium nature of the properties while maintaining clear information hierarchy and readability.</p>
+                            
+                            <h6 class="mb-4">Project Specifications</h6>
+                            <ul class="project-meta-list">
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Type</span>
+                                    <span class="project-meta-value">Project Brochure</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Industry</span>
+                                    <span class="project-meta-value">Real Estate</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Duration</span>
+                                    <span class="project-meta-value">5 Days</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Pages</span>
+                                    <span class="project-meta-value">16 Pages</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Style</span>
+                                    <span class="project-meta-value">Modern Minimalist</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 2 -->
+    <div class="modal fade" id="portfolioModal2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-container">
+                        <div class="modal-image-container">
+                            <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/generalTrading_1.png" alt="Tech Company Profile">
+                        </div>
+                        <div class="modal-details-container">
+                            <h2 class="modal-project-title">Shipping & Trade Company Profile</h2>
+                            <p class="modal-project-description">A modern company profile for a leading trade and shipping firm, highlighting innovation, efficiency, and global reach. Sleek design and structured content showcase cutting-edge logistics, strategic partnerships, and industry leadership, reinforcing trust and excellence in global trade.</p>
+                            
+                            <h6 class="mb-4">Project Specifications</h6>
+                            <ul class="project-meta-list">
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Type</span>
+                                    <span class="project-meta-value">Company Profile</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Industry</span>
+                                    <span class="project-meta-value">Shipping & Trade</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Duration</span>
+                                    <span class="project-meta-value">7 Days</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Pages</span>
+                                    <span class="project-meta-value">24 Pages</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Style</span>
+                                    <span class="project-meta-value">Tech-Forward</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 3 -->
+    <div class="modal fade" id="portfolioModal3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-container">
+                        <div class="modal-image-container">
+                            <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/parkTowers.jpg" alt="Park Towers Company Profile
+                            ">
+                        </div>
+                        <div class="modal-details-container">
+                            <h2 class="modal-project-title">Park Towers Company Profile</h2>
+                            <p class="modal-project-description">An elegant profile design for a Parking Management service agency, blending sophistication and clarity to highlight seamless solutions, advanced technology, and efficient operations, ensuring a professional and trustworthy brand image.</p>
+                            
+                            <h6 class="mb-4">Project Specifications</h6>
+                            <ul class="project-meta-list">
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Type</span>
+                                    <span class="project-meta-value">Business Profile</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Industry</span>
+                                    <span class="project-meta-value">Transport & Aviation</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Duration</span>
+                                    <span class="project-meta-value">10 Days</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Pages</span>
+                                    <span class="project-meta-value">32 Pages</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Style</span>
+                                    <span class="project-meta-value">Modern Parking Management</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 4 -->
+    <div class="modal fade" id="portfolioModal4" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-container">
+                        <div class="modal-image-container">
+                            <img src="http://127.0.0.1:8000/media/portfolio/hover/alwashia.png" alt="Luxury Hotel Brochure">
+                        </div>
+                        <div class="modal-details-container">
+                            <h2 class="modal-project-title">Fashion Brochure </h2>
+                            <p class="modal-project-description">A premium business profile design and product showcase. The profile was used to open its first store in Dubai Mall</p>
+                            
+                            <h6 class="mb-4">Project Specifications</h6>
+                            <ul class="project-meta-list">
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Type</span>
+                                    <span class="project-meta-value">Business Profile</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Industry</span>
+                                    <span class="project-meta-value">Fashion</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Duration</span>
+                                    <span class="project-meta-value">6 Days</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Pages</span>
+                                    <span class="project-meta-value">20 Pages</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Style</span>
+                                    <span class="project-meta-value">Luxury Classic Fashionsta</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 5 -->
+    <div class="modal fade" id="portfolioModal5" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-container">
+                        <div class="modal-image-container">
+                            <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/cleaning_services.png" alt="Tech Conference Flyer">
+                        </div>
+                        <div class="modal-details-container">
+                            <h2 class="modal-project-title">Cleaning Service Brochure</h2>
+                            <p class="modal-project-description"> The LUX Cleaning Services brochure blends modern professionalism with a luxury classic touch, showcasing elegance, prestige, and meticulous service. The opulent interiors and refined details convey exclusivity and high-end quality, appealing to luxury hotels, residences, and premium businesses seeking impeccable cleanliness and sophistication.</p>
+                            
+                            <h6 class="mb-4">Project Specifications</h6>
+                            <ul class="project-meta-list">
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Type</span>
+                                    <span class="project-meta-value">Service Brochure</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Industry</span>
+                                    <span class="project-meta-value">Service</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Duration</span>
+                                    <span class="project-meta-value">3 Days</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Pages</span>
+                                    <span class="project-meta-value">8 Pages</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Style</span>
+                                    <span class="project-meta-value">Modern & Professional with a Luxury Classic touch</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 6 -->
+    <div class="modal fade" id="portfolioModal6" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-container">
+                        <div class="modal-image-container">
+                            <img src="http://127.0.0.1:8000/media/portfolio/thumbnails/emirates_travel.png" alt="Travel Agency Profile">
+                        </div>
+                        <div class="modal-details-container">
+                            <h2 class="modal-project-title">Travel Agency Profile</h2>
+                            <p class="modal-project-description">An appetizing brand profile for a high-end travel experience company, designed to evoke luxury, exclusivity, and wanderlust. Showcasing breathtaking destinations, bespoke itineraries, and premium services, it captivates affluent travelers seeking unforgettable journeys.</p>
+                            
+                            <h6 class="mb-4">Project Specifications</h6>
+                            <ul class="project-meta-list">
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Type</span>
+                                    <span class="project-meta-value">Brand Profile</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Industry</span>
+                                    <span class="project-meta-value">Travel & Tourism</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Duration</span>
+                                    <span class="project-meta-value">8 Days</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Pages</span>
+                                    <span class="project-meta-value">28 Pages</span>
+                                </li>
+                                <li class="project-meta-item">
+                                    <span class="project-meta-label">Style</span>
+                                    <span class="project-meta-value">Elegant Culinary</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-16 text-center" style="background-color: #dd1a22;">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl font-bold">AI-Powered Branding & Design Solutions</h1>
+            <p class="mt-4 text-lg">From brochures to websites, Blinkea helps businesses achieve stunning branding with AI-driven efficiency.</p>
+            <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-6 inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200">Start your project now!</a>
+        </div>
+    </section>
+    
+    {% include 'main/footer.html' %}
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>

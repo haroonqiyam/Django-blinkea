@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Blinkea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Header Section -->
+    {% include 'main/header.html' %}
+
+    <!-- Page Content Section -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-extrabold text-black mb-4">{{ page.title }}</h1>
+        <div class="prose">
+            {{ page.content|safe }}
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    {% include 'main/footer.html' %}
+
+</body>
+</html>

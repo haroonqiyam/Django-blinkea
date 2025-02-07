@@ -1,0 +1,37 @@
+{% load static %}
+
+<!-- Load CSS -->
+<link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+
+<section class="scroll-section" style="background: {{ config.background_color|default:'linear-gradient(to right, #1a1a1a, #2a2a2a)' }};">
+    <!-- Add dynamic styles for config values -->
+    <style>
+        .scroll-wrapper.logos { animation-duration: {{ config.logo_scroll_speed|default:20 }}s; }
+        .scroll-wrapper.thumbnails { animation-duration: {{ config.thumbnail_scroll_speed|default:30 }}s; }
+        .scroll-wrapper.logos img { height: {{ config.logo_height|default:60 }}px; }
+        .scroll-wrapper.thumbnails img { height: {{ config.thumbnail_height|default:200 }}px; }
+    </style>
+
+    <!-- Logo Panel -->
+    <div class="logo-panel mb-12">
+        <div class="scroll-wrapper logos">
+            {% for logo in logos %}
+                <img src="{{ logo.image.url }}" alt="{{ logo.alt_text }}">
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Portfolio Thumbnails -->
+    <div class="thumbnail-panel">
+        <div class="scroll-wrapper thumbnails">
+            {% for thumbnail in thumbnails %}
+                <a href="{{ thumbnail.link }}">
+                    <img src="{{ thumbnail.image.url }}" alt="{{ thumbnail.alt_text }}">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Load JavaScript -->
+<script src="{% static 'main/js/scroll-portfolio.js' %}"></script>

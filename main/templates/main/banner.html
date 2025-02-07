@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include AOS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+</head>
+<body>
+    <!-- Banner Section with AOS Scroll Animation -->
+    <section 
+        style="
+            {% if banner.background_image %}
+            background-image: url('{{ banner.background_image.url }}'); 
+            background-size: cover; 
+            background-position: center; 
+            {% else %}
+            background-color: {{ banner.background_color|default:'#B91C1C' }};
+            {% endif %}
+            padding: 4rem 0; 
+            min-height: 100vh; /* Allow the section to expand dynamically */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; /* Center content vertically */
+        " 
+        data-aos="fade-up" 
+        data-aos-duration="1000"
+    >
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <!-- Animated Typing Headings -->
+            <div 
+                id="animated-heading" 
+                style="
+                    font-size: {{ banner.heading_font_size }}px; 
+                    color: {{ banner.heading_text_color|default:'#FFFFFF' }};
+                    font-weight: bold; 
+                    margin-bottom: 20px;
+                "
+                data-aos="fade-up"
+                data-aos-duration="1500"
+            >
+                <!-- JavaScript will populate this -->
+            </div>
+
+            <!-- Title -->
+            <h1 
+                style="
+                    font-size: 3rem; 
+                    font-weight: 800; 
+                    color: #FFFFFF; 
+                    margin-top: {{ banner.title_spacing_top }}px; 
+                    margin-bottom: {{ banner.title_spacing_bottom }}px;
+                " 
+                data-aos="fade-up" 
+                data-aos-duration="1500"
+            >
+                {{ banner.title }}
+            </h1>
+            
+            <!-- Subtitle -->
+            <p 
+                style="
+                    font-size: 1.125rem; 
+                    color: #FFFFFF; 
+                    text-transform: uppercase; 
+                    letter-spacing: 0.05em; 
+                    margin-top: {{ banner.subtitle_spacing_top }}px; 
+                    margin-bottom: {{ banner.subtitle_spacing_bottom }}px;
+                " 
+                data-aos="fade-up" 
+                data-aos-duration="2000"
+            >
+                {{ banner.subtitle }}
+            </p>
+            
+            <!-- Image -->
+            <div 
+                style="
+                    display: flex; 
+                    justify-content: center; 
+                    margin-top: {{ banner.image_spacing_top }}px; 
+                    margin-bottom: {{ banner.image_spacing_bottom }}px;
+                " 
+                data-aos="fade-up" 
+                data-aos-duration="2500"
+            >
+                <img 
+                    src="{{ banner.image.url }}" 
+                    alt="Banner Image" 
+                    style="
+                        width: 100%; 
+                        max-width: 42rem; 
+                        object-fit: contain; 
+                        border-radius: 0.5rem;
+                    "
+                >
+            </div>
+            
+            <!-- Call-to-Action Button -->
+            <div 
+                style="
+                    margin-top: {{ banner.button_spacing_top }}px; 
+                    margin-bottom: {{ banner.button_spacing_bottom }}px;
+                "
+            >
+                <a 
+                    href="{{ banner.button_link }}" 
+                    style="
+                        background-color: #FFFFFF; 
+                        color: #B91C1C; 
+                        font-weight: bold; 
+                        padding: 0.5rem 1.5rem; 
+                        border-radius: 0.5rem; 
+                        text-decoration: none; 
+                        display: inline-block; 
+                        transition: all 0.3s ease-in-out; 
+                        font-size: 1.2rem;
+                    " 
+                    onmouseover="this.style.backgroundColor='#EF4444'; this.style.color='#FFFFFF';" 
+                    onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#B91C1C';"
+                >
+                    {{ banner.button_text }}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AOS JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+
+        // Typing Animation Script
+        const headings = "{{ banner.animated_headings|default:'' }}".split(',').map(h => h.trim());
+        const typingSpeed = {{ banner.heading_animation_speed|default:100 }};
+        let headingIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const animatedHeading = document.getElementById('animated-heading');
+
+        function type() {
+            if (headings.length === 0) return;
+
+            const currentHeading = headings[headingIndex];
+            const displayText = isDeleting
+                ? currentHeading.substring(0, charIndex--)
+                : currentHeading.substring(0, charIndex++);
+            
+            animatedHeading.textContent = displayText + (isDeleting ? '' : '|');
+
+            if (!isDeleting && charIndex === currentHeading.length) {
+                setTimeout(() => (isDeleting = true), 1000); // Pause before deleting
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                headingIndex = (headingIndex + 1) % headings.length;
+            }
+
+            setTimeout(type, isDeleting ? typingSpeed / 2 : typingSpeed);
+        }
+
+        type();
+    </script>
+</body>
+</html>

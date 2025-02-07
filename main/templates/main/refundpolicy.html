@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinkea Refund & Satisfaction Policy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<header class="bg-black py-4">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6">
+        <div class="flex-shrink-0">
+            {% if header_settings.logo %}
+                <a href="/">
+                    <img src="{{ header_settings.logo.url }}" alt="Blinkea Logo" class="h-16">
+                </a>
+            {% else %}
+                <a href="http://127.0.0.1:8000"><img src="http://127.0.0.1:8000/media/logos/logo_v55JOk8.png" width="120"></a>
+            {% endif %}
+        </div>
+        <nav class="hidden md:flex space-x-8">
+            {% for link in nav_links %}
+                <a href="{{ link.url }}" 
+                   style="color: {{ header_settings.menu_item_text_color|default:'#fff' }};
+                          font-size: {{ header_settings.menu_font_size|default:'18' }}px;" 
+                   class="font-bold hover:text-red-500 transition duration-300">
+                    {{ link.title }}
+                </a>
+            {% endfor %}
+        </nav>
+        <div>
+            <a href="http://127.0.0.1:8000/auth/my-account/" 
+               class="bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-700 transition">
+                {{ header_settings.button_text|default:'My Account' }}
+            </a>
+        </div>
+    </div>
+</header>
+
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Blinkea Refund & Satisfaction Policy</h1>
+        <p class="lead text-center mb-5">At Blinkea, we are committed to delivering high-quality, professional designs tailored to your needs. Since our services involve custom graphic design work, our refund policy is designed to ensure fairness while guaranteeing unlimited revisions until you are fully satisfied.</p>
+        
+        <h2 class="mt-4">No Refunds on Approved Designs</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>Once a design is approved or selected, it is considered final, and no refunds will be issued.</li>
+            <li>This is because each design is custom-made for you and involves significant creative work.</li>
+        </ul>
+
+        <h2 class="mt-4">Unlimited Revisions Until Satisfaction</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>We don’t stop working until you’re happy!</li>
+            <li>If you are not satisfied with the initial designs, we offer unlimited revisions to refine and adjust the design until it meets your expectations.</li>
+        </ul>
+
+        <h2 class="mt-4">Refund Eligibility (Before Approval Stage)</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>We understand that circumstances may change. Refund requests are considered only before the following stages:</li>
+            <li>✅ Before the first design concepts are delivered: A full refund is possible if no work has been done.</li>
+            <li>✅ Before requesting any revision: If you are not happy with the initial design and do not wish to proceed with revisions, you may request a partial refund, excluding service and processing fees.</li>
+        </ul>
+
+        <h2 class="mt-4">Refunds Are Not Issued If:</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>❌ You have already approved or selected a design.</li>
+            <li>❌ You have requested revisions and continued with the process.</li>
+            <li>❌ The project is completed and delivered as per the agreed scope.</li>
+            <li>❌ You fail to communicate or provide feedback within a reasonable time.</li>
+        </ul>
+
+        <h2 class="mt-4">Quality Commitment</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>Our goal is to ensure 100% satisfaction with your design.</li>
+            <li>If at any point you feel your expectations are not being met, we encourage you to reach out, and we will work closely with you to make the necessary improvements.</li>
+        </ul>
+
+        <h2 class="mt-4">Exceptional Cases</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>In rare situations where we are unable to fulfill the project due to unforeseen reasons on our end, a refund may be considered at our discretion.</li>
+        </ul>
+
+        <h2 class="mt-4">Final Thoughts</h2>
+        <p>At Blinkea, we believe in delivering value, not just a service. While we do not offer refunds after design approval, our unlimited revisions policy ensures you receive a design you love.</p>
+        
+        <p>📩 For any concerns or assistance, please contact our support team at <a href="mailto:support@blinkea.com">support@blinkea.com</a>.</p>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="text-center py-16">
+        <h2 class="text-3xl font-bold">🚀 Start Your AI-Powered Branding Journey Today!</h2>
+        <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700">Get Started Now</a>
+    </section>
+
+    <!-- Footer Section -->
+    {% include 'main/footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

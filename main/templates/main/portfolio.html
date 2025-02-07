@@ -1,0 +1,104 @@
+{% load static %}
+
+<section 
+    style="
+        padding-top: {{ portfolio_settings.container_spacing_top }}px;
+        padding-bottom: {{ portfolio_settings.container_spacing_bottom }}px;
+        padding-left: {{ portfolio_settings.container_spacing_left }}px;
+        padding-right: {{ portfolio_settings.container_spacing_right }}px;
+        background-color: {{ portfolio_settings.container_background_color }};
+    "
+    data-aos="fade-up"
+>
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <!-- Section Title -->
+        <h2 
+            style="
+                font-size: 2rem; 
+                font-weight: 800; 
+                color: #1F2937; 
+                margin-bottom: 2rem;
+            "
+        >
+            {{ portfolio_settings.section_title }}
+        </h2>
+
+        <!-- Portfolio Grid -->
+        <div 
+            style="
+                display: grid;
+                grid-template-columns: repeat({{ portfolio_settings.columns }}, 1fr);
+                gap: 20px;
+            "
+        >
+            {% for portfolio in portfolios %}
+            <div 
+                style="
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 8px;
+                    transition: transform 0.3s ease-in-out;
+                    background: #f9f9f9;
+                " 
+                onmouseover="this.style.transform='scale(1.03)'" 
+                onmouseout="this.style.transform='scale(1)'"
+            >
+                <a href="{{ portfolio.detail_url }}" style="text-decoration: none; display: block;">
+                    <!-- Thumbnail Image -->
+                    <img 
+                        src="{{ portfolio.thumbnail_image.url }}" 
+                        alt="{{ portfolio.title }}" 
+                        style="
+                            width: 100%; 
+                            height: {{ portfolio_settings.item_height }}px; 
+                            object-fit: cover;
+                            border-radius: 8px;
+                        "
+                    >
+                    <!-- Hover Image -->
+                    {% if portfolio.hover_image %}
+                    <img 
+                        src="{{ portfolio.hover_image.url }}" 
+                        alt="{{ portfolio.title }}" 
+                        style="
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: {{ portfolio_settings.item_height }}px; 
+                            object-fit: cover;
+                            border-radius: 8px;
+                            opacity: 0;
+                            transition: opacity 0.3s ease-in-out;
+                        "
+                        onmouseover="this.style.opacity='1'" 
+                        onmouseout="this.style.opacity='0'"
+                    >
+                    {% endif %}
+                    <!-- Portfolio Title -->
+                    <h3 
+                        style="
+                            font-size: 1.25rem;
+                            font-weight: bold;
+                            color: #1F2937;
+                            margin-top: 10px;
+                        "
+                    >
+                        {{ portfolio.title }}
+                    </h3>
+                    <!-- Portfolio Description -->
+                    <p 
+                        style="
+                            font-size: 1rem;
+                            color: #6B7280;
+                            margin-top: 5px;
+                        "
+                    >
+                        {{ portfolio.description }}
+                    </p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

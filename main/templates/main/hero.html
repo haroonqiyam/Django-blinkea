@@ -1,0 +1,114 @@
+{% load static %}
+
+<!-- hero.html -->
+<section 
+    style="
+        background: linear-gradient(to right, {{ hero.background_color_from|default:'#991B1B' }}, {{ hero.background_color_to|default:'#1E3A8A' }}); 
+        color: {{ hero.text_color|default:'#FFFFFF' }}; 
+        min-height: 50vh; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center; 
+        padding: {{ hero.padding_top|default:64 }}px {{ hero.padding_right|default:16 }}px {{ hero.padding_bottom|default:64 }}px {{ hero.padding_left|default:16 }}px;
+    " 
+    data-aos="fade-up"
+>
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 
+            style="
+                font-size: {{ hero.main_heading_size|default:48 }}px; 
+                font-weight: 800; 
+                margin-top: {{ hero.main_heading_spacing_top|default:0 }}px; 
+                margin-bottom: {{ hero.main_heading_spacing_bottom|default:16 }}px;
+            " 
+            data-aos="zoom-in" 
+            data-aos-duration="1200"
+        >
+            {{ hero.main_heading|default:"Default Heading" }}
+        </h1>
+
+        <p 
+            style="
+                font-size: {{ hero.subheading_size|default:18 }}px; 
+                margin-top: {{ hero.subheading_spacing_top|default:16 }}px; 
+                margin-bottom: {{ hero.subheading_spacing_bottom|default:24 }}px;
+            " 
+            data-aos="fade-up" 
+            data-aos-delay="200"
+        >
+            {{ hero.subheading|default:"Default Subheading" }}
+        </p>
+
+        <div 
+            style="display: flex; justify-content: center; gap: 1rem;" 
+            data-aos="fade-up" 
+            data-aos-delay="400"
+        >
+            <a 
+                href="{{ hero.button_1_url }}" 
+                aria-label="Button: {{ hero.button_1_text }}" 
+                style="
+                    background-color: {{ hero.button_1_bg_color|default:'#DC2626' }}; 
+                    color: {{ hero.button_1_text_color|default:'#FFFFFF' }}; 
+                    padding: 0.75rem 1.5rem; 
+                    border-radius: 9999px; 
+                    font-weight: 600; 
+                    font-size: 1rem; 
+                    transition: transform 0.3s;
+                " 
+                onmouseover="this.style.transform='scale(1.05)';" 
+                onmouseout="this.style.transform='scale(1)';"
+            >
+                {{ hero.button_1_text|default:"Learn More" }}
+            </a>
+            <a 
+                href="{{ hero.button_2_url }}" 
+                aria-label="Button: {{ hero.button_2_text }}" 
+                style="
+                    border: 2px solid {{ hero.button_2_border_color|default:'#FFFFFF' }}; 
+                    color: {{ hero.button_2_text_color|default:'#FFFFFF' }}; 
+                    padding: 0.75rem 1.5rem; 
+                    border-radius: 9999px; 
+                    font-weight: 600; 
+                    font-size: 1rem; 
+                    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+                " 
+                onmouseover="
+                    this.style.backgroundColor='{{ hero.button_2_hover_bg_color|default:'#FFFFFF' }}'; 
+                    this.style.color='{{ hero.button_2_hover_text_color|default:'#000000' }}'; 
+                    this.style.transform='scale(1.05)';
+                " 
+                onmouseout="
+                    this.style.backgroundColor='transparent'; 
+                    this.style.color='{{ hero.button_2_text_color|default:'#FFFFFF' }}'; 
+                    this.style.transform='scale(1)';
+                "
+            >
+                {{ hero.button_2_text|default:"Get Started" }}
+            </a>
+        </div>
+
+        <p 
+            style="
+                color: {{ hero.clients_info_color|default:'#D1D5DB' }}; 
+                margin-top: {{ hero.clients_info_spacing_top|default:32 }}px; 
+                font-size: 0.875rem;
+            " 
+            data-aos="fade-in" 
+            data-aos-delay="600"
+        >
+            {{ hero.clients_info|default:"Join thousands of happy clients today!" }}
+        </p>
+    </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+</script>

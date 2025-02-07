@@ -1,0 +1,52 @@
+{% load static %}
+
+<section
+    class="cta-section text-white"
+    style="
+        background: linear-gradient(to right, {{ cta_section.bg_color_start }}, {{ cta_section.bg_color_end }});
+        padding: {{ cta_section.padding_top }}px {{ cta_section.padding_right }}px {{ cta_section.padding_bottom }}px {{ cta_section.padding_left }}px;
+        height: {{ cta_section.container_height }};
+    "
+    data-aos="fade-up"
+>
+    <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between">
+        <!-- CTA Text -->
+        <div class="text-center lg:text-{{ cta_section.title_alignment }} mb-8 lg:mb-0">
+            <h2
+                class="font-extrabold leading-snug"
+                style="
+                    font-size: {{ cta_section.title_size }}px;
+                    color: {{ cta_section.title_color }};
+                    text-align: {{ cta_section.title_alignment }};
+                "
+            >
+                {{ cta_section.title }}
+            </h2>
+        </div>
+        
+        <!-- CTA Button -->
+        <div>
+            <a
+                href="{{ cta_section.button_url }}"
+                class="btn btn-cta inline-block font-semibold py-3 px-6 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring"
+                style="
+                    background-color: {{ cta_section.button_color }};
+                    color: {{ cta_section.button_text_color }};
+                    width: {{ cta_section.button_width }};
+                "
+            >
+                {{ cta_section.button_text }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Include AOS Animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+</script>

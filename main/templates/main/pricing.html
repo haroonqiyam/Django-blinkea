@@ -1,0 +1,340 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Blinkea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #dd1a22;
+            --secondary-color: #333;
+        }
+
+        .pricing-calculator {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .calculator-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .calculator-right {
+            flex: 1;
+            min-width: 300px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .form-range {
+            width: 100%;
+        }
+
+        .range-value {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .currency-selector {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .price-breakdown {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #b81419;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<header class="bg-black py-4">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6">
+        
+        <!-- ✅ Logo Section -->
+        <div class="flex-shrink-0">
+            {% if header_settings.logo %}
+                <a href="/">
+                    <img src="{{ header_settings.logo.url }}" alt="Blinkea Logo" class="h-16">
+                </a>
+            {% else %}
+                <a href="http://127.0.0.1:8000"><img src="http://127.0.0.1:8000/media/logos/logo_v55JOk8.png" width="120"></a>
+            {% endif %}
+        </div>
+
+        <!-- ✅ Navigation Links -->
+        <nav class="hidden md:flex space-x-8">
+            {% for link in nav_links %}
+                <a href="{{ link.url }}" 
+                   style="color: {{ header_settings.menu_item_text_color|default:'#fff' }};
+                          font-size: {{ header_settings.menu_font_size|default:'18' }}px;" 
+                   class="font-bold hover:text-red-500 transition duration-300">
+                    {{ link.title }}
+                </a>
+            {% endfor %}
+        </nav>
+
+        <!-- ✅ Account Button -->
+        <div>
+            <a href="http://127.0.0.1:8000/auth/my-account/" 
+               class="bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-700 transition">
+                {{ header_settings.button_text|default:'My Account' }}
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<body>
+    <main class="pricing-calculator">
+        <h1 class="text-center mb-5"><b>Calculate Your Design Price</b></h1>
+        
+        <div class="calculator-container">
+            <div class="calculator-left">
+                <div class="mb-4">
+                    <label class="form-label">Design Style</label>
+                    <select class="form-select" id="designStyle">
+                        <option value="" disabled selected>Choose a Design Style</option>
+                        <option value="booklet">Brochure / Profile (Enter Pages)</option>
+                        <option value="bi-fold">Bi-Fold (4 pages)</option>
+                        <option value="tri-fold">Tri-Fold (6 pages)</option>
+                        <option value="quad-fold">Quad-Fold (8 pages)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4" id="pagesSection" style="display: none;">
+                    <label class="form-label">Number of Pages</label>
+                    <input type="range" class="form-range" id="pagesSlider" min="4" max="48" value="4">
+                    <div class="range-value" id="pagesValue">4 pages</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Delivery Option</label>
+                    <select class="form-select" id="deliveryOption">
+                        <option value="" disabled selected>Select Delivery</option>
+                        <option value="normal">Normal (5-9 Days)</option>
+                        <option value="express">Express (2-5 Days)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Select Currency</label>
+                    <select class="form-select" id="currency">
+                        <option value="USD">USD ($)</option>
+                        <option value="AED">AED (د.إ)</option>
+                        <option value="SAR">SAR (﷼)</option>
+                        <option value="QAR">QAR (ر.ق)</option>
+                        <option value="BHD">BHD (.د.ب)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calculator-right">
+                <div class="price-display" id="totalPrice">$120</div>
+                
+                <div class="price-breakdown">
+                    <h3>Price Breakdown</h3>
+                    <div class="price-item">
+                        <span>Design Price</span>
+                        <span id="designPrice">$120</span>
+                    </div>
+                    <div class="price-item">
+                        <span>Express Delivery</span>
+                        <span id="expressPrice">$0</span>
+                    </div>
+                    <div class="price-item">
+                        <span>Total</span>
+                        <span id="breakdownTotal">$120</span>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="window.location.href='/auth/my-account/'">
+                    Get Started Now
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Exchange rates (you might want to fetch these from an API in production)
+        const exchangeRates = {
+            USD: 1,
+            AED: 3.67,
+            SAR: 3.75,
+            QAR: 3.64,
+            BHD: 0.376
+        };
+
+        const designStyleSelect = document.getElementById('designStyle');
+        const pagesSection = document.getElementById('pagesSection');
+        const pagesSlider = document.getElementById('pagesSlider');
+        const pagesValue = document.getElementById('pagesValue');
+
+        function formatCurrency(amount, currency) {
+            const symbols = {
+                USD: '$',
+                AED: 'د.إ',
+                SAR: '﷼',
+                QAR: 'ر.ق',
+                BHD: '.د.ب'
+            };
+            
+            const convertedAmount = amount * exchangeRates[currency];
+            return `${symbols[currency]}${convertedAmount.toFixed(2)}`;
+        }
+
+        function togglePagesSection() {
+            const isBooklet = designStyleSelect.value === 'booklet';
+            pagesSection.style.display = isBooklet ? 'block' : 'none';
+            
+            // Set default pages based on design style
+            if (!isBooklet) {
+                switch (designStyleSelect.value) {
+                    case 'bi-fold':
+                        pagesSlider.value = 4;
+                        break;
+                    case 'tri-fold':
+                        pagesSlider.value = 6;
+                        break;
+                    case 'quad-fold':
+                        pagesSlider.value = 8;
+                        break;
+                }
+            }
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const designStyle = designStyleSelect.value;
+            const pages = parseInt(pagesSlider.value);
+            const deliveryOption = document.getElementById('deliveryOption').value;
+            const currency = document.getElementById('currency').value;
+
+            let designPrice = 0;
+            let expressPrice = 0;
+
+            // Calculate design price
+            switch (designStyle) {
+                case 'bi-fold':
+                    designPrice = 120;
+                    break;
+                case 'tri-fold':
+                    designPrice = 180;
+                    break;
+                case 'quad-fold':
+                    designPrice = 240;
+                    break;
+                case 'booklet':
+                    designPrice = pages * 30;
+                    break;
+            }
+
+            // Calculate express delivery price
+            if (deliveryOption === 'express') {
+                if (designStyle === 'booklet') {
+                    expressPrice = pages * 5;
+                } else {
+                    expressPrice = 30;
+                }
+            }
+
+            const total = designPrice + expressPrice;
+
+            // Update display
+            document.getElementById('designPrice').textContent = formatCurrency(designPrice, currency);
+            document.getElementById('expressPrice').textContent = formatCurrency(expressPrice, currency);
+            document.getElementById('breakdownTotal').textContent = formatCurrency(total, currency);
+            document.getElementById('totalPrice').textContent = formatCurrency(total, currency);
+        }
+
+        // Event listeners
+        designStyleSelect.addEventListener('change', togglePagesSection);
+        pagesSlider.addEventListener('input', function() {
+            pagesValue.textContent = this.value + ' pages';
+            updatePrice();
+        });
+        document.getElementById('deliveryOption').addEventListener('change', updatePrice);
+        document.getElementById('currency').addEventListener('change', updatePrice);
+
+        // Initial setup
+        togglePagesSection();
+        updatePrice();
+    </script>
+
+        <!-- Footer Section -->
+        {% include 'main/footer.html' %}
+</body>
+</html>

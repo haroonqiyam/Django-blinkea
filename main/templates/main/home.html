@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Banner Section -->
+    {% if banner %}
+        {% include 'main/banner.html' %}
+    {% endif %}
+
+    <!-- Hero Section -->
+    {% if hero %}
+        {% include 'main/hero.html' %}
+    {% endif %}
+
+    <!-- Scroll Portfolio Section -->
+    {% if config %}
+        {% include 'main/scrollportfolio.html' %}
+    {% endif %}
+
+    <!-- Clients Section -->
+    {% if clients %}
+        {% include 'main/clients.html' %}
+    {% endif %}
+
+    <!-- Portfolio Section -->
+    {% if portfolios %}
+        {% include 'main/portfolio.html' %}
+    {% endif %}
+
+    <!-- CTA Section -->
+    {% if cta_section %}
+        {% include 'main/cta.html' %}
+    {% endif %}
+
+    <!-- Dynamic Sections -->
+    {% for section in sections %}
+        {% include section.template_name %}
+    {% endfor %}
+{% endblock %}

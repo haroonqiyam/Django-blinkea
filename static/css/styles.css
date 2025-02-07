@@ -1,0 +1,61 @@
+/* Scroll Portfolio Styles */
+.scroll-section {
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+}
+
+.scroll-wrapper {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.scroll-wrapper.logos {
+    animation: scrollLogos 20s linear infinite;
+}
+
+.scroll-wrapper.thumbnails {
+    animation: scrollThumbnails 30s linear infinite;
+}
+
+.scroll-wrapper img {
+    margin: 0 2rem;
+    flex-shrink: 0;
+}
+
+.scroll-wrapper.logos img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.scroll-wrapper.thumbnails img {
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+@keyframes scrollLogos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes scrollThumbnails {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .scroll-wrapper.logos img {
+        height: 40px;
+        margin: 0 1rem;
+    }
+
+    .scroll-wrapper.thumbnails img {
+        height: 150px;
+        margin: 0 1rem;
+    }
+}

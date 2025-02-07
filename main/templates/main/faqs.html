@@ -1,0 +1,368 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Blinkea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: left;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            padding-left: 25px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-left: 15px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            color: #dd1a22;
+        }
+
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        h2 {
+            color: #dd1a22;
+            margin: 50px 0 30px 0;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-section {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact-section h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Hover effects */
+        .faq-question:hover {
+            color: #dd1a22;
+        }
+
+        /* Section dividers */
+        .section-divider {
+            height: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<header class="bg-black py-4">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between px-6">
+        <!-- Logo Section -->
+        <div class="flex-shrink-0">
+            {% if header_settings.logo %}
+                <a href="/"><img src="{{ header_settings.logo.url }}" alt="Blinkea Logo" class="h-16"></a>
+            {% else %}
+                <a href="http://127.0.0.1:8000"><img src="http://127.0.0.1:8000/media/logos/logo_v55JOk8.png" width="120"></a>
+            {% endif %}
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex space-x-8">
+            {% for link in nav_links %}
+                <a href="{{ link.url }}" 
+                   style="color: {{ header_settings.menu_item_text_color|default:'#fff' }};
+                          font-size: {{ header_settings.menu_font_size|default:'18' }}px;" 
+                   class="font-bold hover:text-red-500 transition duration-300">
+                    {{ link.title }}
+                </a>
+            {% endfor %}
+        </nav>
+
+        <!-- Account Button -->
+        <div>
+            <a href="http://127.0.0.1:8000/auth/my-account/" 
+               class="bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-700 transition">
+                {{ header_settings.button_text|default:'My Account' }}
+            </a>
+        </div>
+    </div>
+</header>
+
+<body>
+    <div class="faq-container">
+        <h1>Frequently Asked Questions</h1>
+        
+        <h2>General Questions</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                What is Blinkea?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Blinkea is an AI-powered design agency that helps businesses create high-quality branding materials like brochures, company profiles, websites, and marketing assets with efficiency and speed.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How does Blinkea's AI-powered design process work?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Our AI analyzes your design needs based on the form you fill out, then generates design drafts tailored to your brand. Our expert designers refine and finalize the designs based on your feedback.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Who can use Blinkea's services?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Blinkea is perfect for startups, small businesses, corporate brands, marketing teams, and agencies looking for fast and high-quality branding solutions.</div>
+        </div>
+
+        <div class="section-divider"></div>
+        
+        <h2>Services & Offerings</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                What design services do you offer?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">
+                We specialize in:<br><br>
+                - 📖 Brochure Design – Print & digital formats<br>
+                - 🏢 Company Profile Design – Custom corporate branding<br>
+                - ✍️ AI Copywriting – SEO-optimized, engaging content<br>
+                - 🖨️ Print & Digital Marketing Materials – Flyers, banners, digital ads<br>
+                - 🌐 Website Design – Responsive and optimized for speed
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I customize my design?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Yes! Our AI-generated designs are fully customizable. You can request modifications, revisions, and tailor them to fit your brand identity.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you provide revisions?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Yes! We offer unlimited revisions to ensure you get the perfect design.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                What if I don't like the design?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">You can request changes or select another design variation. Our goal is to make sure you're 100% satisfied.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>Orders & Pricing</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I place an order?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Simply sign up, select a service, fill out the form, and submit your request. You'll receive design drafts in your dashboard.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How much do your services cost?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Our pricing depends on the service and level of customization. <a href="http://127.0.0.1:8000/pricing/"><u>Click here to Visit our Page for Price </u> detailed packages.</a> </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you offer discounts for bulk orders?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Yes! We offer special rates for bulk or recurring orders. Contact us for a custom quote.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>Turnaround Time & Delivery</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                How long does it take to receive my design?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Our AI-powered system generates initial drafts within 24-48 hours. Revisions and finalizations depend on your feedback.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                In what format will I receive my files?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">You will receive high-resolution PDF, JPG, PNG, AI, and PSD files, depending on the service.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you offer express delivery?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Yes! We offer express delivery at an additional cost for urgent projects.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>Billing & Payment</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                What payment methods do you accept?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">We accept credit/debit cards, PayPal, and bank transfers.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Is my payment secure?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Absolutely! We use secure payment gateways to ensure your transactions are safe.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I get a refund?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">We offer refunds only if no design work has started. Once the initial draft is delivered, we provide unlimited revisions instead.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>Technical & Support</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                I'm having trouble logging in. What should I do?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Try resetting your password. If the issue persists, contact Support.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you store my designs?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Yes, your designs are securely stored for 6 months. You can download them anytime from your dashboard.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I request custom branding services not listed on the website?
+                <i class="fas fa-plus icon"></i>
+            </button>
+            <div class="faq-answer">Yes! Contact us with your specific needs, and we'll create a custom branding solution for you.</div>
+        </div>
+
+        <div class="contact-section">
+            <h3>Need More Help?</h3>
+            <p>📧 Email: support@blinkea.com</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(faqItem => {
+                const button = faqItem.querySelector('.faq-question');
+                button.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(item => {
+                        if (item !== faqItem) {
+                            item.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    faqItem.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+
+
+
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-16 text-center" style="background-color: #dd1a22;">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl font-bold">AI-Powered Branding & Design Solutions</h1>
+            <p class="mt-4 text-lg">From brochures to websites, Blinkea helps businesses achieve stunning branding with AI-driven efficiency.</p>
+            <a href="http://127.0.0.1:8000/auth/my-account/" class="mt-6 inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200">Start your project now!</a>
+        </div>
+    </section>
+
+    
+    <!-- Footer Section -->
+    {% include 'main/footer.html' %}
+</body>
+</html>
