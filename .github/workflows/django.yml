@@ -1,0 +1,54 @@
+name: Django CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+        
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run Migrations
+      env:
+        DJANGO_SETTINGS_MODULE: website.settings
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/github_actions
+      run: |
+        python manage.py makemigrations
+        python manage.py migrate
+        
+    - name: Run Tests
+      env:
+        DJANGO_SETTINGS_MODULE: website.settings
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/github_actions
+      run: |
+        python manage.py test
