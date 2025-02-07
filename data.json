@@ -1,0 +1,321 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$Kt2mfVI4kgW7XZe78lo9Uv$Hq8l+cxjYDtYCoDOyCEpM2BCp8DeK+dwjE+rSCmACTk=",
+    "last_login": "2025-02-07T18:15:17.568Z",
+    "is_superuser": true,
+    "username": "haroonqiyam",
+    "first_name": "",
+    "last_name": "",
+    "email": "haroonqiyam@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-02-07T18:14:47.053Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ixkh3dzxpdgh1irwwqmgwrdupe7fsyg2",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pBOaWFw6d4zkGEYpGpoUtqV8e7apAvd_vfef6lA21rC1mQJU1JnBer0u0Xih9QdpDvV26x5rusyRb0r-qBNX-ckz8vh_h0UauVbR0_eoe-TCFserI3Odh7EIBh0GTB3NmWgPpoxGxgYcnKImb2MiILq_QHfHDfR:1tgSsn:G2dOzCGnYmmvp7WuCuikAJSWCqqZ5EZtMhauHL7OrDs",
+    "expire_date": "2025-02-21T18:15:17.569Z"
+  }
+},
+{
+  "model": "main.scrollportfolioconfig",
+  "pk": 1,
+  "fields": {
+    "background_color": "linear-gradient(to right, navy, purple)",
+    "logo_scroll_speed": 10.0,
+    "logo_width": 100,
+    "thumbnail_scroll_speed": 10.0,
+    "thumbnail_width": 380
+  }
+},
+{
+  "model": "main.scrolllogo",
+  "pk": 1,
+  "fields": {
+    "image": "logos/bridge_3ze35cS.png",
+    "alt_text": ""
+  }
+},
+{
+  "model": "main.scrolllogo",
+  "pk": 2,
+  "fields": {
+    "image": "logos/icba.png",
+    "alt_text": ""
+  }
+},
+{
+  "model": "main.scrolllogo",
+  "pk": 3,
+  "fields": {
+    "image": "logos/cartier.png",
+    "alt_text": ""
+  }
+},
+{
+  "model": "main.scrolllogo",
+  "pk": 4,
+  "fields": {
+    "image": "logos/bismi_YE2NzgE.png",
+    "alt_text": ""
+  }
+},
+{
+  "model": "main.scrollthumbnail",
+  "pk": 1,
+  "fields": {
+    "image": "thumbnails/alwashia.jpg",
+    "link": "http://bindron.com",
+    "alt_text": "Bindron"
+  }
+},
+{
+  "model": "main.scrollthumbnail",
+  "pk": 2,
+  "fields": {
+    "image": "thumbnails/thumbnail5.jpg",
+    "link": "http://bindron.com",
+    "alt_text": "Bindron"
+  }
+},
+{
+  "model": "main.scrollthumbnail",
+  "pk": 3,
+  "fields": {
+    "image": "thumbnails/thumbnail6.jpg",
+    "link": "http://bindron.com",
+    "alt_text": "Bindron"
+  }
+},
+{
+  "model": "main.ctasection",
+  "pk": 1,
+  "fields": {
+    "title": "le'ts do it.",
+    "title_color": "#FFFFFF",
+    "title_size": 24,
+    "title_alignment": "left",
+    "container_height": "auto",
+    "bg_color_start": "#1E3A8A",
+    "bg_color_end": "#1D4ED8",
+    "padding_top": 64,
+    "padding_bottom": 64,
+    "padding_left": 16,
+    "padding_right": 16,
+    "button_text": "Get a quote now →",
+    "button_text_color": "#FFFFFF",
+    "button_color": "#EF4444",
+    "button_width": "auto",
+    "button_url": "http://127.0.0.1:8000/"
+  }
+},
+{
+  "model": "main.portfolio",
+  "pk": 1,
+  "fields": {
+    "title": "1",
+    "thumbnail_image": "portfolio/thumbnails/alwashia.jpg",
+    "hover_image": "portfolio/hover/parkTowers.jpg",
+    "description": "sadfasdf",
+    "detail_url": "http://brochure.html",
+    "order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "main.portfolio",
+  "pk": 2,
+  "fields": {
+    "title": "3322",
+    "thumbnail_image": "portfolio/thumbnails/emirates_travel.png",
+    "hover_image": "",
+    "description": "sadfasd",
+    "detail_url": "http://127.0.0.1:8000",
+    "order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "main.portfoliosettings",
+  "pk": 2,
+  "fields": {
+    "section_title": "Work Portfolio",
+    "columns": 3,
+    "container_background_color": "#FFFFFF",
+    "container_spacing_top": 20,
+    "container_spacing_bottom": 20,
+    "container_spacing_left": 20,
+    "container_spacing_right": 20,
+    "item_height": 300
+  }
+},
+{
+  "model": "main.client",
+  "pk": 1,
+  "fields": {
+    "name": "1",
+    "logo": "clients/logos/bridge.png",
+    "order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "main.client",
+  "pk": 2,
+  "fields": {
+    "name": "2",
+    "logo": "clients/logos/bridge_lKiMWSA.png",
+    "order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "main.client",
+  "pk": 3,
+  "fields": {
+    "name": "3",
+    "logo": "clients/logos/cartier.png",
+    "order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "main.clientsettings",
+  "pk": 1,
+  "fields": {
+    "columns": 4,
+    "container_spacing_top": 20,
+    "container_spacing_bottom": 20,
+    "container_spacing_left": 20,
+    "container_spacing_right": 20
+  }
+},
+{
+  "model": "main.clientsettings",
+  "pk": 2,
+  "fields": {
+    "columns": 4,
+    "container_spacing_top": 20,
+    "container_spacing_bottom": 20,
+    "container_spacing_left": 20,
+    "container_spacing_right": 20
+  }
+},
+{
+  "model": "main.herosection",
+  "pk": 1,
+  "fields": {
+    "background_color_from": "#991B1B",
+    "background_color_to": "#1E3A8A",
+    "text_color": "#FFFFFF",
+    "padding_top": 64,
+    "padding_bottom": 64,
+    "padding_left": 16,
+    "padding_right": 16,
+    "main_heading": "AI Powered Solutions",
+    "main_heading_size": 48,
+    "main_heading_spacing_top": 0,
+    "main_heading_spacing_bottom": 16,
+    "subheading": "sssdfsadf",
+    "subheading_size": 18,
+    "subheading_spacing_top": 16,
+    "subheading_spacing_bottom": 24,
+    "button_1_text": "Get started",
+    "button_1_url": "http://get.html",
+    "button_1_bg_color": "#DC2626",
+    "button_1_text_color": "#FFFFFF",
+    "button_2_text": "view work",
+    "button_2_url": "http://work.html",
+    "button_2_border_color": "#FFFFFF",
+    "button_2_text_color": "#FFFFFF",
+    "button_2_hover_bg_color": "#FFFFFF",
+    "button_2_hover_text_color": "#000000",
+    "clients_info": "sadf adsf a",
+    "clients_info_color": "#D1D5DB",
+    "clients_info_spacing_top": 32,
+    "is_active": true
+  }
+},
+{
+  "model": "main.navlink",
+  "pk": 1,
+  "fields": {
+    "title": "one",
+    "url": "work.html",
+    "is_active": true
+  }
+},
+{
+  "model": "main.navlink",
+  "pk": 2,
+  "fields": {
+    "title": "two",
+    "url": "services.html",
+    "is_active": true
+  }
+},
+{
+  "model": "main.navlink",
+  "pk": 3,
+  "fields": {
+    "title": "three",
+    "url": "work.html",
+    "is_active": true
+  }
+},
+{
+  "model": "main.footerlink",
+  "pk": 1,
+  "fields": {
+    "name": "1",
+    "url": "http://127.0.0.1:8000/"
+  }
+},
+{
+  "model": "main.footerlink",
+  "pk": 2,
+  "fields": {
+    "name": "2",
+    "url": "http://127.0.0.1:8000/"
+  }
+},
+{
+  "model": "main.headersettings",
+  "pk": 1,
+  "fields": {
+    "background_color": "#000000",
+    "logo": "",
+    "logo_height": 42,
+    "logo_top_padding": 10,
+    "logo_bottom_padding": 10,
+    "logo_left_padding": 10,
+    "logo_right_padding": 10,
+    "menu_item_text_color": "#FFFFFF",
+    "menu_item_hover_color": "#FF0000",
+    "menu_font_size": 16,
+    "button_text": "My Account",
+    "button_background_color": "#FF0000",
+    "button_text_color": "#FFFFFF",
+    "button_hover_background_color": "#CC0000",
+    "button_hover_text_color": "#FFFFFF",
+    "button_link": "http://127.0.0.1:8000/",
+    "button_top_padding": 10,
+    "button_bottom_padding": 10,
+    "button_left_padding": 10,
+    "button_right_padding": 10,
+    "header_height": 120,
+    "container_top_padding": 10,
+    "container_bottom_padding": 10,
+    "container_left_padding": 10,
+    "container_right_padding": 10
+  }
+}
+]
