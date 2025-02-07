@@ -40,7 +40,7 @@ jobs:
         
     - name: Run Migrations
       env:
-        DJANGO_SETTINGS_MODULE: website.settings
+        DJANGO_SETTINGS_MODULE: blinkea.settings
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/github_actions
       run: |
         python manage.py makemigrations
@@ -48,7 +48,7 @@ jobs:
         
     - name: Run Tests
       env:
-        DJANGO_SETTINGS_MODULE: website.settings
+        DJANGO_SETTINGS_MODULE: blinkea.settings
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/github_actions
       run: |
         python manage.py test
