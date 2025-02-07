@@ -129,18 +129,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Additional locations of static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Media files (Uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Tailwind configuration
-TAILWIND_APP_NAME = 'theme'
+# Ensure media directory exists
+os.makedirs(MEDIA_ROOT, exist_ok=True)
 
-NPM_BIN_PATH = 'npm'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# Static files handling
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -148,11 +153,17 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+# Compress configuration
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
+# Tailwind configuration
 TAILWIND_APP_NAME = 'theme'
+NPM_BIN_PATH = 'npm'
 
 INTERNAL_IPS = [
     '127.0.0.1',

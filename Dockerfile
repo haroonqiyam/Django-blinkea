@@ -19,14 +19,17 @@ RUN apt-get update && \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Create media directory
+RUN mkdir -p /app/media
+
 # Copy project
 COPY . .
 
 # Make start script executable
 RUN chmod +x start.sh
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
+# Create volume for media files
+VOLUME /app/media
 
 # Run start script which handles migrations and starts gunicorn
 CMD ["./start.sh"]
