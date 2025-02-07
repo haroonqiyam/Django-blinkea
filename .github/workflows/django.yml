@@ -100,7 +100,7 @@ jobs:
           --min-instances=1
           --service-account=github-actions@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
         env_vars: |
-          DATABASE_URL=postgres://blinkea_user:${{ secrets.DB_PASSWORD }}@db/blinkea_django
+          DATABASE_URL=postgres://blinkea_user:${{ secrets.DB_PASSWORD }}@localhost/blinkea_django
           DJANGO_SETTINGS_MODULE=blinkea.settings
           DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
           DJANGO_DEBUG=False
@@ -110,8 +110,6 @@ jobs:
           ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}
           ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
           ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
-        secrets: |
-          GCP_SA_KEY=${{ secrets.GCP_SA_KEY }}
 
     - name: Show Output
       run: echo ${{ steps.deploy.outputs.url }}
