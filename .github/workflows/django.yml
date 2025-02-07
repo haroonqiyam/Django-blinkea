@@ -103,6 +103,8 @@ jobs:
           DATABASE_URL=postgres://blinkea_user:${{ secrets.DB_PASSWORD }}@db/blinkea_django
           DJANGO_SETTINGS_MODULE=blinkea.settings
           DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_DEBUG=False
+          ALLOWED_HOSTS=blinkea-web-293882995795.us-central1.run.app
           GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
           REGION=${{ env.REGION }}
           ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}
