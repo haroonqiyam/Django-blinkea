@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blinkea - Innovative Technology Solutions</title>
+    <title>Blinkea - AI Powered Design Solutions</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,22 +14,33 @@
     
     <!-- Custom Styles -->
     <style>
-        /* Add any custom styles here */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #8B0000 0%, #000033 100%);
+        }
     </style>
 </head>
-<body class="font-sans">
+<body class="bg-black text-white">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
-        <div class="container mx-auto px-6 py-4">
+    <nav class="bg-black py-4 fixed w-full z-50 top-0">
+        <div class="container mx-auto px-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <a href="{% url 'website:home' %}" class="text-2xl font-bold text-blue-600">Blinkea</a>
+                    <a href="{% url 'website:home' %}" class="text-2xl font-bold text-white">
+                        <img src="{% static 'img/logo.svg' %}" alt="Blinkea" class="h-8">
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{% url 'website:home' %}" class="text-gray-700 hover:text-blue-600">Home</a>
-                    <a href="{% url 'website:solutions' %}" class="text-gray-700 hover:text-blue-600">Solutions</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-600">About</a>
-                    <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Contact Us</a>
+                    <a href="{% url 'website:home' %}" class="text-white hover:text-red-600 transition duration-300">Solution</a>
+                    <a href="{% url 'website:solutions' %}" class="text-white hover:text-red-600 transition duration-300">Services</a>
+                    <a href="#work" class="text-white hover:text-red-600 transition duration-300">Work</a>
+                    <a href="#about" class="text-white hover:text-red-600 transition duration-300">About</a>
+                    <a href="#contact" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition duration-300">Start a project →</a>
                 </div>
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
@@ -54,7 +66,7 @@
     {% block content %}{% endblock %}
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
+    <footer class="bg-black text-white border-t border-gray-800">
         <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div>

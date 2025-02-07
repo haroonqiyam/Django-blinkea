@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="32" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 8h8v16H0V8z" fill="#FF0000"/>
+  <path d="M12 4h8v24h-8V4z" fill="#FF3333"/>
+  <path d="M24 0h8v32h-8V0z" fill="#FF6666"/>
+  <text x="40" y="22" font-family="Inter" font-weight="700" font-size="20" fill="white">BLINKEA</text>
+</svg>

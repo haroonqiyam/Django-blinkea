@@ -3,62 +3,63 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
-    <div class="container mx-auto px-6 py-20">
-        <div class="flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-5xl font-bold leading-tight mb-6">Transform Your Business with Blinkea</h1>
-                <p class="text-xl mb-8">Innovative technology solutions that drive growth and efficiency for your enterprise</p>
-                <div class="space-x-4">
-                    <a href="{% url 'website:solutions' %}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">Explore Solutions</a>
-                    <a href="#contact" class="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">Contact Us</a>
-                </div>
-            </div>
-            <div class="md:w-1/2">
-                <img src="{% static 'img/hero-illustration.svg' %}" alt="Hero Illustration" class="w-full">
-            </div>
+<section class="gradient-bg min-h-screen flex items-center pt-20">
+    <div class="container mx-auto px-6 py-20 text-center">
+        <h1 class="text-6xl md:text-7xl font-bold mb-8 max-w-4xl mx-auto">
+            AI POWERED<br>DESIGN SOLUTIONS
+        </h1>
+        <p class="text-xl mb-12 max-w-2xl mx-auto opacity-80">
+            "Experience the speed of creativity with the tactical vision<br>
+            design agency — where exceptional designs meet unbeatable efficiency"
+        </p>
+        <div class="flex justify-center space-x-6">
+            <a href="#start" class="bg-red-600 text-white px-8 py-3 rounded font-semibold hover:bg-red-700 transition duration-300">Start a project →</a>
+            <a href="#work" class="border border-white px-8 py-3 rounded font-semibold hover:bg-white hover:text-black transition duration-300">View our work</a>
         </div>
+        <p class="mt-12 text-sm opacity-60">Shifter, clients globally, across all industries.</p>
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-20 bg-gray-50">
+<!-- Clients Section -->
+<section class="py-20 bg-black">
     <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-16">Why Choose Blinkea</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {% for feature in features %}
-            <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                    <i class="fas fa-{{ feature.icon }} text-2xl text-blue-600"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-4">{{ feature.title }}</h3>
-                <p class="text-gray-600">{{ feature.description }}</p>
+        <h2 class="text-3xl font-bold text-center mb-16">Clients & Partners</h2>
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-12 items-center opacity-50">
+            {% for client in clients %}
+            <div class="flex justify-center">
+                <img src="{% static client.logo %}" alt="{{ client.name }}" class="h-8 object-contain">
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Stats Section -->
-<section class="py-20 bg-blue-600 text-white">
+<!-- Work Portfolio Section -->
+<section id="work" class="py-20 bg-black">
     <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            {% for stat in stats %}
-            <div>
-                <div class="text-5xl font-bold mb-2">{{ stat.number }}</div>
-                <div class="text-xl">{{ stat.label }}</div>
-            </div>
+        <h2 class="text-3xl font-bold mb-12">Work Portfolio</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for project in projects %}
+            <a href="#" class="group relative overflow-hidden rounded-lg aspect-square">
+                <img src="{% static project.image %}" alt="{{ project.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
+                    <div>
+                        <h3 class="text-xl font-bold">{{ project.title }}</h3>
+                        <p class="text-sm opacity-75">{{ project.category }}</p>
+                    </div>
+                </div>
+            </a>
             {% endfor %}
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-20">
+<section id="start" class="py-20 gradient-bg">
     <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-8">Ready to Get Started?</h2>
-        <p class="text-xl text-gray-600 mb-10">Transform your business with our innovative solutions</p>
-        <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Schedule a Consultation</a>
+        <h2 class="text-4xl md:text-5xl font-bold mb-8">Ready to Start Your Project?</h2>
+        <p class="text-xl opacity-80 mb-10 max-w-2xl mx-auto">Let's create something exceptional together</p>
+        <a href="#contact" class="bg-red-600 text-white px-8 py-3 rounded font-semibold hover:bg-red-700 transition duration-300">Start a project →</a>
     </div>
 </section>
 {% endblock %}

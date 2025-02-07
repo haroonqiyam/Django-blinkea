@@ -7,27 +7,55 @@ def error_503(request, exception=None):
 
 def home(request):
     context = {
-        'features': [
-            {
-                'title': 'Innovative Solutions',
-                'description': 'Cutting-edge technology solutions tailored to your business needs',
-                'icon': 'lightbulb'
-            },
-            {
-                'title': 'Expert Team',
-                'description': 'Dedicated professionals with years of industry experience',
-                'icon': 'users'
-            },
-            {
-                'title': '24/7 Support',
-                'description': 'Round-the-clock technical support and maintenance',
-                'icon': 'phone'
-            }
+        'clients': [
+            {'name': 'BSMI', 'logo': 'img/clients/bsmi.svg'},
+            {'name': 'Cartier', 'logo': 'img/clients/cartier.svg'},
+            {'name': 'ICBA', 'logo': 'img/clients/icba.svg'},
+            {'name': 'Precision', 'logo': 'img/clients/precision.svg'},
+            {'name': 'Berger', 'logo': 'img/clients/berger.svg'},
+            {'name': 'Damilano', 'logo': 'img/clients/damilano.svg'},
         ],
-        'stats': [
-            {'number': '95%', 'label': 'Client Satisfaction'},
-            {'number': '500+', 'label': 'Projects Completed'},
-            {'number': '50+', 'label': 'Expert Team Members'}
+        'projects': [
+            {
+                'title': 'DarkBox',
+                'category': 'Branding Design, Product Design',
+                'image': 'img/portfolio/darkbox.svg'
+            },
+            {
+                'title': 'Eo',
+                'category': 'Branding Service, Website UX/UI Design',
+                'image': 'img/portfolio/eo.svg'
+            },
+            {
+                'title': 'TaxiAI',
+                'category': 'Application Analytics',
+                'image': 'img/portfolio/taxiai.svg'
+            },
+            {
+                'title': 'Eliosa',
+                'category': 'Branding Service, FMCG',
+                'image': 'img/portfolio/eliosa.svg'
+            },
+            {
+                'title': 'Azeta',
+                'category': 'UI Design & Branding, Product Packaging',
+                'image': 'img/portfolio/azeta.svg'
+            },
+            {
+                'title': 'Vabix',
+                'category': 'Branding Service, Website Design',
+                'image': 'img/portfolio/vabix.svg'
+            },
+            {
+                'title': 'Ice & Joy',
+                'category': 'Branding Service, Design & Technology',
+                'image': 'img/portfolio/ice-joy.svg'
+            },
+            {
+                'title': 'BIT',
+                'category': 'UI Design & Branding, Website Design',
+                'image': 'img/portfolio/bit.svg'
+            },
         ]
     }
     return render(request, 'website/home.html', context)
