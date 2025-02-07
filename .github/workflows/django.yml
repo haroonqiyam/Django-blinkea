@@ -89,9 +89,16 @@ jobs:
         service: ${{ env.SERVICE }}
         region: ${{ env.REGION }}
         image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
+        flags: |
+          --cpu=1
+          --memory=512Mi
+          --port=8080
+          --allow-unauthenticated
+          --add-cloudsql-instances=${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
         env_vars: |
-          DATABASE_URL=postgres://blinkea_user:blinkea-user-2025@/blinkea_django?host=/cloudsql/${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
+          DATABASE_URL=postgres://blinkea_user:blinkea-user-2025@localhost/blinkea_django?host=/cloudsql/${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
           DJANGO_SETTINGS_MODULE=blinkea.settings
+          PORT=8080
         secrets: |
           DJANGO_SECRET_KEY=django-secret-key:latest
 

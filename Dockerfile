@@ -20,7 +20,12 @@ RUN apt-get update && \
     libfreetype6-dev \
     liblcms2-dev \
     libwebp-dev \
+    wget \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Cloud SQL Proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /cloud_sql_proxy && \
+    chmod +x /cloud_sql_proxy
 
 # Install Python dependencies
 COPY requirements.txt .
