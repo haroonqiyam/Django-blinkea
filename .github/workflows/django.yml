@@ -111,7 +111,7 @@ jobs:
           ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
           ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
         secrets: |
-          DJANGO_SECRET_KEY=django-secret-key:latest
+          GCP_SA_KEY=${{ secrets.GCP_SA_KEY }}
 
     - name: Show Output
       run: echo ${{ steps.deploy.outputs.url }}
