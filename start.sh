@@ -25,12 +25,12 @@ python manage.py collectstatic --noinput
 echo "Compressing static files..."
 python manage.py compress --force
 
-# Start Cloud SQL proxy in the background
-echo "Starting Cloud SQL proxy..."
-/cloud_sql_proxy -instances=${GOOGLE_CLOUD_PROJECT}:${REGION}:blinkea-db=tcp:5432 &
-
-# Wait for the proxy to be ready
-sleep 5
+# Wait for PostgreSQL to be ready
+echo "Waiting for PostgreSQL..."
+while ! pg_isready -h db -p 5432 -U blinkea_user; do
+  echo "Waiting for PostgreSQL to start..."
+  sleep 2
+done
 
 # Start Gunicorn
 echo "Starting Gunicorn..."

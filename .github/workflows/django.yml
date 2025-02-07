@@ -70,7 +70,9 @@ jobs:
       uses: google-github-actions/auth@v2
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
+        token_format: 'access_token'
         export_default_credentials: true
+        service_account: 'github-actions@${{ env.PROJECT_ID }}.iam.gserviceaccount.com'
 
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
@@ -95,11 +97,10 @@ jobs:
           --memory=512Mi
           --port=8080
           --allow-unauthenticated
-          --add-cloudsql-instances=${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
-          --set-cloudsql-instances=${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
           --min-instances=1
+          --service-account=github-actions@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
         env_vars: |
-          DATABASE_URL=postgres://blinkea_user:blinkea-user-2025@localhost/blinkea_django?host=/cloudsql/${{ env.PROJECT_ID }}:${{ env.REGION }}:blinkea-db
+          DATABASE_URL=postgres://blinkea_user:blinkea-user-2025@db/blinkea_django
           DJANGO_SETTINGS_MODULE=blinkea.settings
           GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
           REGION=${{ env.REGION }}

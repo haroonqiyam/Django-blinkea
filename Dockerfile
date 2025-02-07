@@ -23,9 +23,8 @@ RUN apt-get update && \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Cloud SQL Proxy
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /cloud_sql_proxy && \
-    chmod +x /cloud_sql_proxy
+# Install PostgreSQL client
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .

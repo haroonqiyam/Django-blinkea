@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://blinkea_user:blinkea-user-2025@db/blinkea_django
+      - DJANGO_SETTINGS_MODULE=blinkea.settings
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    command: ./start.sh
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=blinkea_django
+      - POSTGRES_USER=blinkea_user
+      - POSTGRES_PASSWORD=blinkea-user-2025
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
