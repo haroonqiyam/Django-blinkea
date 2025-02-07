@@ -40,3 +40,4 @@ staticfiles/
 
 # Node
 node_modules/
+.env

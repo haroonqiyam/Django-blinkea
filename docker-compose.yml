@@ -5,8 +5,10 @@ services:
     build: .
     ports:
       - "8000:8000"
+    env_file:
+      - .env
     environment:
-      - DATABASE_URL=postgres://blinkea_user:${DB_PASSWORD:-blinkea-user-2025}@db/blinkea_django
+      - DATABASE_URL=postgres://blinkea_user:${DB_PASSWORD}@db/blinkea_django
       - DJANGO_SETTINGS_MODULE=blinkea.settings
     depends_on:
       - db
@@ -16,10 +18,12 @@ services:
 
   db:
     image: postgres:13
+    env_file:
+      - .env
     environment:
       - POSTGRES_DB=blinkea_django
       - POSTGRES_USER=blinkea_user
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-blinkea-user-2025}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

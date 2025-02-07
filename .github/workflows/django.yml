@@ -99,12 +99,15 @@ jobs:
           --allow-unauthenticated
           --min-instances=1
           --service-account=github-actions@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
-          --update-secrets=DB_PASSWORD=blinkea-db-password:latest
         env_vars: |
-          DATABASE_URL=postgres://blinkea_user:${DB_PASSWORD}@db/blinkea_django
+          DATABASE_URL=postgres://blinkea_user:${{ secrets.DB_PASSWORD }}@db/blinkea_django
           DJANGO_SETTINGS_MODULE=blinkea.settings
+          DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
           GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
           REGION=${{ env.REGION }}
+          ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}
+          ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+          ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
         secrets: |
           DJANGO_SECRET_KEY=django-secret-key:latest
 
