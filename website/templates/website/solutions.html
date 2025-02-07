@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinkea Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Transform Your Business with Blinkea Solutions</h1>
+                <p class="text-xl mb-8">Empowering businesses with cutting-edge technology solutions for the digital age</p>
+                <a href="#solutions" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300">Explore Solutions</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Our Solutions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for solution in solutions %}
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-300">
+                    <div class="text-4xl text-blue-600 mb-4">
+                        <i class="fas fa-{{ solution.icon }}"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">{{ solution.title }}</h3>
+                    <p class="text-gray-600">{{ solution.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="bg-gray-100 py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                    <h3 class="font-semibold mb-2">Consultation</h3>
+                    <p class="text-gray-600">We understand your business needs and challenges</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                    <h3 class="font-semibold mb-2">Strategy</h3>
+                    <p class="text-gray-600">We develop a tailored solution strategy</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                    <h3 class="font-semibold mb-2">Implementation</h3>
+                    <p class="text-gray-600">We implement and integrate the solution</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
+                    <h3 class="font-semibold mb-2">Support</h3>
+                    <p class="text-gray-600">We provide ongoing support and optimization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+            <p class="text-xl mb-8">Get started with Blinkea solutions today</p>
+            <a href="#contact" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300">Contact Us</a>
+        </div>
+    </section>
+</body>
+</html>
