@@ -17,14 +17,24 @@ if python manage.py help | grep -q compress; then
     python manage.py compress --force || echo "Compression failed but continuing..."
 fi
 
-# Extract database host from DATABASE_URL
-DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:]*\).*/\1/p')
-DB_PORT=5432
+# Extract database connection info from DATABASE_URL
+if [ -n "$DATABASE_URL" ]; then
+    # Parse DATABASE_URL
+    DB_USER=$(echo $DATABASE_URL | sed -n 's/postgres:\/\/\([^:]*\):.*/\1/p')
+    DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:\/]*\).*/\1/p')
+    DB_PORT=5432
+    echo "Database configuration: host=$DB_HOST port=$DB_PORT user=$DB_USER"
+else
+    echo "WARNING: DATABASE_URL not set"
+    DB_HOST="localhost"
+    DB_PORT=5432
+    DB_USER="postgres"
+fi
 
 # Wait for PostgreSQL with timeout
 echo "Checking PostgreSQL connection on $DB_HOST:$DB_PORT..."
 TIMEOUT=30
-while ! pg_isready -h "$DB_HOST" -p "$DB_PORT" -U blinkea_user -t 1 >/dev/null 2>&1; do
+while ! pg_isready -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -t 1 >/dev/null 2>&1; do
     TIMEOUT=$((TIMEOUT - 1))
     if [ $TIMEOUT -eq 0 ]; then
         echo "Timed out waiting for PostgreSQL to start"
