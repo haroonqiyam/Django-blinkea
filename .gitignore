@@ -41,3 +41,5 @@ staticfiles/
 # Node
 node_modules/
 .env
+cloud-sql-proxy
+service-account-key.json
