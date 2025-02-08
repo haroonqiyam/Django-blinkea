@@ -71,7 +71,8 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
         token_format: 'access_token'
-        export_default_credentials: true
+        create_credentials_file: true
+        export_environment_variables: true
         service_account: 'github-actions@${{ env.PROJECT_ID }}.iam.gserviceaccount.com'
 
     - name: Set up Cloud SDK
