@@ -48,6 +48,16 @@ done
 echo "Applying database migrations..."
 python manage.py migrate --noinput || echo "Migrations failed but continuing..."
 
+# Check if database is empty and load initial data if needed
+echo "Checking if database needs initial data..."
+USER_COUNT=$(python manage.py shell -c "from django.contrib.auth.models import User; print(User.objects.count())")
+if [ "$USER_COUNT" = "0" ]; then
+    echo "Database is empty, loading initial data..."
+    python manage.py loaddata data.json || echo "Failed to load initial data but continuing..."
+else
+    echo "Database already has data, skipping initial load"
+fi
+
 # Start Gunicorn with proper error handling
 echo "Starting Gunicorn on port $PORT..."
 exec gunicorn --bind :$PORT \
