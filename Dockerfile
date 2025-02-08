@@ -21,26 +21,28 @@ RUN apt-get update && \
     liblcms2-dev \
     libwebp-dev \
     wget \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
-
-# Install PostgreSQL client
-RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt gunicorn
 
-# Create media directory
-RUN mkdir -p /app/media
+# Create necessary directories
+RUN mkdir -p /app/media /app/static /app/staticfiles
 
 # Copy project
 COPY . .
 
-# Make start script executable
-RUN chmod +x start.sh
+# Set proper permissions
+RUN chmod +x start.sh && \
+    chown -R www-data:www-data /app
+
+# Switch to non-root user
+USER www-data
 
 # Create volume for media files
 VOLUME /app/media
 
 # Run start script which handles migrations and starts gunicorn
-CMD ["./start.sh"]
+CMD ["bash", "-c", "echo \"Starting application on port $PORT\" && ./start.sh"]
