@@ -101,7 +101,7 @@ jobs:
           --min-instances=1
           --service-account=github-actions@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
         env_vars: |
-          DATABASE_URL="postgres://blinkea_user:${{ secrets.DB_PASSWORD }}@34.59.30.137:5432/blinkea_django?sslmode=require"
+          DATABASE_URL=postgresql://blinkea_user:${{ secrets.DB_PASSWORD }}@34.59.30.137:5432/blinkea_django?sslmode=require
           DJANGO_SETTINGS_MODULE=blinkea.settings
           "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}"
           DJANGO_DEBUG=False

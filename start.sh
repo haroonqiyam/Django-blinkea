@@ -19,11 +19,21 @@ fi
 
 # Extract database connection info from DATABASE_URL
 if [ -n "$DATABASE_URL" ]; then
-    # Parse DATABASE_URL
+    # Print DATABASE_URL for debugging (without password)
+    SAFE_URL=$(echo $DATABASE_URL | sed 's/:[^:@]*@/@/')
+    echo "Database URL (sanitized): $SAFE_URL"
+    
+    # Parse DATABASE_URL components
     DB_USER=$(echo $DATABASE_URL | sed -n 's/postgres:\/\/\([^:]*\):.*/\1/p')
     DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:\/]*\).*/\1/p')
-    DB_PORT=5432
-    echo "Database configuration: host=$DB_HOST port=$DB_PORT user=$DB_USER"
+    DB_PORT=$(echo $DATABASE_URL | sed -n 's/.*:([0-9]*)\/.*/\1/p' || echo '5432')
+    DB_NAME=$(echo $DATABASE_URL | sed -n 's/.*\/\([^?]*\).*/\1/p')
+    
+    echo "Database configuration:"
+    echo " - Host: $DB_HOST"
+    echo " - Port: $DB_PORT"
+    echo " - User: $DB_USER"
+    echo " - Database: $DB_NAME"
 else
     echo "WARNING: DATABASE_URL not set"
     DB_HOST="localhost"
